@@ -2,6 +2,7 @@ package com.example.practicaltest.unit;
 
 import com.example.practicaltest.unit.beverage.Americano;
 import com.example.practicaltest.unit.order.Order;
+import org.assertj.core.internal.AtomicReferenceArrayElementComparisonStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -95,5 +96,4 @@ class CafeKioskTest {
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("주문 가능 시간이 아닙니다.");
     }
-
 }
