@@ -2,6 +2,7 @@ package com.example.practicaltest.unit;
 
 import com.example.practicaltest.unit.beverage.Americano;
 import com.example.practicaltest.unit.order.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CafeKioskTest {
 
     @Test
+    @DisplayName("수동으로 음료를 추가하면 음료수가 생성 된다.")
     void add_manual_test() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
@@ -21,6 +23,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("음료 추가")
     void add() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
@@ -29,6 +32,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("여러 음료 추가")
     void addSeveralBeverages() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
@@ -39,6 +43,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("음료 추가시 0 추가 실패")
     void addZeroBeverages() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
@@ -48,6 +53,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("음료 추가시 음료가 없을 때 실패")
     void remove() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
@@ -59,6 +65,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("음료 추가시 음료가 없을 때 실패")
     void clear() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
@@ -69,6 +76,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("음료를 주문 하면 주문이 생성 된다.")
     void createOrder() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
@@ -79,6 +87,7 @@ class CafeKioskTest {
     }
 
     @Test
+    @DisplayName("영업 시작 시간 이전에는 주문을 생성 할 수 없다.")
     void createOrderOuterTest() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
