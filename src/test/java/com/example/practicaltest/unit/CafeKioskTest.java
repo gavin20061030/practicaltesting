@@ -1,9 +1,13 @@
 package com.example.practicaltest.unit;
 
 import com.example.practicaltest.unit.beverage.Americano;
+import com.example.practicaltest.unit.order.Order;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CafeKioskTest {
@@ -22,6 +26,25 @@ class CafeKioskTest {
         cafeKiosk.add(new Americano());
         assertThat(cafeKiosk.getBeverages().size()).isEqualTo(1);
         assertThat(cafeKiosk.getBeverages().get(0).getName()).isEqualTo("아메리카노");
+    }
+
+    @Test
+    void addSeveralBeverages() {
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+        cafeKiosk.add(americano,2);
+
+        assertThat(cafeKiosk.getBeverages().get(0)).isEqualTo(americano);
+        assertThat(cafeKiosk.getBeverages().get(1)).isEqualTo(americano);
+    }
+
+    @Test
+    void addZeroBeverages() {
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+        assertThatThrownBy(()-> cafeKiosk.add(americano,0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("음료의 수량은 1개 이상이어야 합니다.");
     }
 
     @Test
@@ -44,4 +67,24 @@ class CafeKioskTest {
         cafeKiosk.clear();
         assertThat(cafeKiosk.getBeverages()).isEmpty();
     }
+
+    @Test
+    void createOrder() {
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        cafeKiosk.add(new Americano());
+        Order order = cafeKiosk.createOrder();
+
+        assertThat(order.getBeverages()).hasSize(1);
+        assertThat(order.getBeverages().get(0).getName()).isEqualTo("아메리카노");
+    }
+
+    @Test
+    void createOrderOuterTest() {
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        cafeKiosk.add(new Americano());
+        assertThatThrownBy(() -> cafeKiosk.createOrder(LocalDateTime.of(2024,4,28,9,00)))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("주문 가능 시간이 아닙니다.");
+    }
+
 }
